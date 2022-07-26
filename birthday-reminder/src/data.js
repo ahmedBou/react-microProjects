@@ -1,4 +1,4 @@
-export default [
+const people = [
   {
     id: 1,
     name: 'Bertie Yates',
@@ -14,6 +14,7 @@ export default [
       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1595959131/person-3_rxtqvi.jpg',
   },
   {
+
     id: 3,
     name: 'Larry Little',
     age: 36,
@@ -35,3 +36,4 @@ export default [
       'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
   },
 ];
+export default people;

@@ -13,7 +13,7 @@ function App() {
     <main>
       <div className="container" >
 
-        <h3>{people.length}birthday today </h3>
+        <h3>{people.length} birthday today </h3>
         <List people={people}/>
         <button type='button' onClick={()=> setPeople([])}>clear all</button>
 
