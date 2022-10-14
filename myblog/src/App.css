@@ -2,3 +2,17 @@
   font-weight: bold;
   line-height: 20px;
 }
+
+* {
+  font-family: sans-serif;
+}
+nav {
+  background: #ee9972;
+  padding: 20px;
+}
+nav a {
+  color: #edefee;
+  text-decoration: none;
+  font-size: 20px;
+  margin-right: 20px;
+}
