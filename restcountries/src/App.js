@@ -11,13 +11,14 @@ function App() {
 
   const [search, setSearch] = useState('');
 
-  const [showCountry, setShowCountry] = useState(true);
+  const [showCountry, setShowCountry] = useState(false);
 
-
+  console.log(countries)
   useEffect(() => {
     const fetchCountries = async () => {
       const response = await fetch(url);
       const countries = await response.json();
+      countries.forEach((item)=>{ item = {...item, show: false, id: Math.random()}})
       setCountries(countries);
     };
     fetchCountries();
@@ -55,13 +56,13 @@ function App() {
                 <div key={country.name.common}>
                   {country.name.common}
 
-                  <button onClick={()=>{setShowCountry(showCountry)}}>show</button>
+                  <button onClick={()=>{setShowCountry(!showCountry)}}>show</button>
                   {showCountry &&
                     <div>
                       {
-                        filteredData.map((country) => {
+                        filteredData.map((country, index) => {
                           return (
-                            <div key={country.name.common}>
+                            <div key={index}>
                               <h1>{country.name.common}</h1>
                               <p>capital {country.capital}</p>
                               <p>area {country.area}</p>
