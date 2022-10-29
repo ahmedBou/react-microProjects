@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-
 const url = 'https://restcountries.com/v3.1/all';
 
 function App() {
@@ -13,12 +12,13 @@ function App() {
 
   const [showCountry, setShowCountry] = useState(false);
 
-  console.log(countries)
+  console.log(countries);
+
   useEffect(() => {
     const fetchCountries = async () => {
       const response = await fetch(url);
       const countries = await response.json();
-      countries.forEach((item)=>{ item = {...item, show: false, id: Math.random()}})
+      // countries.forEach((item)=>{ item = {...item, show: false, id: Math.random()}})
       setCountries(countries);
     };
     fetchCountries();
@@ -61,7 +61,9 @@ function App() {
                     <div>
                       {
                         filteredData.map((country, index) => {
+
                           return (
+
                             <div key={index}>
                               <h1>{country.name.common}</h1>
                               <p>capital {country.capital}</p>
