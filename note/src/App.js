@@ -1,5 +1,6 @@
 import Note from './components/Note';
 import {useEffect, useState} from 'react';
+import noteService from './services/notes'
 
 import axios from 'axios';
 
@@ -12,12 +13,20 @@ const App = () => {
 
 
     useEffect(() => {
-        axios
-            .get('http://localhost:3001/notes')
-            .then(response => setNotes(response.data))
+        noteService
+            .getAll()
+            //, instead of the entire HTTP response, we would only get the response data.
+            .then(initialNotes => {
+            setNotes(initialNotes)
+        })
+            // .then(response => setNotes(response.data))
+
+        // axios
+        //     .get('http://localhost:3001/notes')
+        //     .then(response => setNotes(response.data))
     }, []);
-    // console.log(notes)
-    console.log('render', notes.length, 'notes')
+
+    // console.log('render', notes.length, 'notes')
     const handleNoteChange = (event) => {
         setNewNotes(event.target.value);
     };
@@ -32,15 +41,23 @@ const App = () => {
             // id: notes.length + 1
         };
 
-        // setNotes(notes.concat(noteObject));
-        // setNewNotes('');
-        axios
-            .post('http://localhost:3001/notes', noteObject)
-            .then(response => {
-                // console.log(response)
-                setNotes(notes.concat(response.data))
+        noteService
+            .create(noteObject)
+            .then(returnedNote => {
+                setNotes(notes.concat(returnedNote))
                 setNewNotes('')
+            // .then(response => {
+            //     setNotes(notes.concat(response.data))
+            //     setNewNotes('')
             })
+
+        // axios
+        //     .post('http://localhost:3001/notes', noteObject)
+        //     .then(response => {
+        //         // console.log(response)
+        //         setNotes(notes.concat(response.data))
+        //         setNewNotes('')
+        //     })
     };
 
     const noteToShow = showAll ? notes : notes.filter((note) => note.important === true)
@@ -48,15 +65,25 @@ const App = () => {
     // Changing the Importance of Notes
     function toggleImportanceOf(id) {
         // Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either replace the entire note with an HTTP PUT request, or only change some of the note's properties with an HTTP PATCH request.
-        const url = `http://localhost:3001/notes/${id}`;
+        // const url = `http://localhost:3001/notes/${id}`;
         const note = notes.find(n => n.id === id);
         const changedNote = {...note, important: !note.important};
         //The callback function sets the component's notes state to a new array that contains all the items from the previous notes array, except for the old note which is replaced by the updated version of it returned by the server
-        axios.put(url, changedNote).then(response => {
-            setNotes(
-                notes.map(n => n.id !== id ? n : response.data)
-            )
+        noteService
+            .update(id, changedNote)
+            .then(returnedNote => {
+            setNotes(notes.map(note => note.id !== id ? note : returnedNote))
         })
+            // .then(response => {
+            //     setNotes(
+            //         notes.map(n => n.id !== id ? n : response.data)
+            //     )
+            
+        // axios.put(url, changedNote).then(response => {
+        //     setNotes(
+        //         notes.map(n => n.id !== id ? n : response.data)
+        //     )
+        // })
     }
 
     return (
