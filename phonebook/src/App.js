@@ -28,8 +28,9 @@ function App() {
     persons.find(
       person => person.name === newName) ?
       alert(`${newName} is already added to phonebook`) :
-      setPersons([...persons, personObject]);
-    setNewName('');
+      axios.post('http://localhost:3001/persons', personObject)
+          .then(response => setPersons([...persons, response.data]))
+      setNewName(''); 
   };
 
   const filterPerson = persons.filter((person) => person.name.toLowerCase() === search);
