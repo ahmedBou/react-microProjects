@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Persons = ({ searchPerson }) => {
+const Persons = ({ searchPerson, deletePhone }) => {
 
 
   return (
@@ -10,7 +10,8 @@ const Persons = ({ searchPerson }) => {
           const { id, name, number } = person;
           return (
             <div key={id}>
-              <p>{name} {number}</p>
+              <span>{name} {number}  </span>
+              <span><button onClick={()=>deletePhone(id)}>delete</button></span>
             </div>
           );
         })

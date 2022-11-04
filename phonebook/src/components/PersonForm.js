@@ -2,8 +2,6 @@ import React from 'react';
 
 const PersonForm = ({addName, newName, handleNameChange, phone, handlePhoneChange }) =>{
 
-
-
   return (
     <>
       <form onSubmit={addName}>
