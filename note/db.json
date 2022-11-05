@@ -21,13 +21,13 @@
     {
       "content": "what about microservices",
       "date": "1667211365105",
-      "important": false,
+      "important": true,
       "id": 4
     },
     {
       "content": "SOLID principle",
       "date": "1667212034102",
-      "important": true,
+      "important": false,
       "id": 5
     },
     {
@@ -35,6 +35,12 @@
       "date": "1667212163313",
       "important": true,
       "id": 6
+    },
+    {
+      "content": "polymorphisme",
+      "date": "1667663252785",
+      "important": true,
+      "id": 7
     }
   ]
 }
