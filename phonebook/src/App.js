@@ -128,7 +128,7 @@ function App() {
     }
 
   }
-  const filterPerson = persons.filter((person) => person.name.toLowerCase() === search);
+  const filterPerson = persons.filter((person) => person.name.toLowerCase().includes(search.toLowerCase()));
 
   const searchPerson = search.length > 0 ? filterPerson : persons;
 
@@ -144,7 +144,8 @@ function App() {
 
       <h2>Phonebook</h2>
       <Notification errorMessage={errorMessage} successMessage={successMessage} />
-      <Filter search={search} handleSearch={handleSearch} />
+      <Filter
+          search={search} handleSearch={handleSearch} />
 
       <h2>Add a New</h2>
       <PersonForm addName={addName} newName={newName}
