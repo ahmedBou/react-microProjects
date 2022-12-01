@@ -6,8 +6,9 @@ import Categories from './Categories';
 
 
 const allCategory = ['all', ...new Set(data.map(item => item.category))];
+console.log('all category',allCategory)
 
-console.log(allCategory);
+
 
 function App() {
 
@@ -22,11 +23,10 @@ function App() {
     }
     const newCategory= menu.filter(item => item.category === category)
     console.log(newCategory);
+    console.log(menu);
     setMenu(newCategory)
   }
-  // useEffect(()=>{
-  //   handleCategory;
-  // })
+
   return (
     <main>
       <section className='menu section'>
@@ -34,7 +34,7 @@ function App() {
           <h2>Our Menu</h2>
           <div className='underline'> </div>
         </div>
-        <Categories categories = {categories} filterItems = {handleCategory} />
+        <Categories categories = {categories} filterItems = {handleCategory} data ={menu}/>
 
         <div className='section-center'>
           {menu.map((item)=>{
